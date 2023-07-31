@@ -2,6 +2,7 @@ import os
 import pandas as pd
 from flask import Flask, request, jsonify
 from pymongo import MongoClient
+from flask_cors import CORS
 
 mongo_user_name = os.environ.get("MONGO_USER_NAME")
 mongo_password = os.environ.get("MONGO_PASSWORD")
@@ -11,6 +12,8 @@ client = MongoClient(f"mongodb+srv://{mongo_user_name}:{mongo_password}@cluster0
                      )
 db = client["test-database"]
 collection = db["test-collection"]
+
+CORS(app)
 
 
 def import_csv_data():
