@@ -3,9 +3,11 @@ import pandas as pd
 from flask import Flask, request, jsonify
 from pymongo import MongoClient
 
+mongo_user_name = os.environ.get("MONGO_USER_NAME")
+mongo_password = os.environ.get("MONGO_PASSWORD")
 
 app = Flask(__name__)
-client = MongoClient("mongodb+srv://<MONGO_USER_NAME>:<MONGO_PASSWORD>@cluster0.8bxb9sn.mongodb.net/?retryWrites=true&w=majority"
+client = MongoClient(f"mongodb+srv://{mongo_user_name}:{mongo_password}@cluster0.8bxb9sn.mongodb.net/?retryWrites=true&w=majority"
                      )
 db = client["test-database"]
 collection = db["test-collection"]
