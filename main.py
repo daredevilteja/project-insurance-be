@@ -1,5 +1,4 @@
 import os
-import pprint
 import pandas as pd
 from flask import Flask, request, jsonify
 from pymongo import MongoClient
@@ -22,7 +21,6 @@ def import_csv_data():
 @app.route('/', methods=["GET"])
 def index():
     if not collection.find_one():
-        pprint.pprint("in")
         import_csv_data()
     return {"data": "DB loaded successfully",
             "message": "server started successfully"}
@@ -34,7 +32,6 @@ def get_premium():
     adult_ages = []
     child_ages = []
     adult_count = data.get("adult_count")
-    pprint.pprint(adult_count)
     if adult_count != 0:
         adult_ages = data.get("adult_ages")
         adult_ages.sort(reverse=True)
